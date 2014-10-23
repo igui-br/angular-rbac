@@ -1,7 +1,7 @@
 angular-rbac
 ============
 
-A simple version of RBAC for angular that can be easily integrated with any angular application and any backend.
+A simple version of RBAC for angular that can be easily integrated with any angular application and any ASP.Net MVC/WebAPI with Identity user management.
 This module consist from 2 parts: **$rbac** service and directive **allow**.
 
 Task of that module is quite simple - *request backend for permission(boolean) for AuthItem (any string).* 
@@ -183,8 +183,8 @@ index.html
 		</head>
 		<body ng-controller="AppController">
 			<button allow="Guest">Login</button>
-			<p allow="User">Hello, user!</p>
-			<button allow="User.UpdateOwnProfile">Update Profile</button>
+			<p allow="User, Admin">Hello, user!</p>
+			<button allow="User.UpdateOwnProfile, Admin">Update Profile</button>
 			<ul ng-repeat="user in users" allow="Admin">
 				<li>{{user.name}} <button allow="User.Update">Update</button></li>
 			</ul>
