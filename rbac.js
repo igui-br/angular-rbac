@@ -9,7 +9,7 @@
  * @author Gayvoronsky Andrey <plandem@gmail.com>
  * @version 1.0
  */
-angular.module('rbac', ['lodash'])
+angular.module('rbac', [])
 	.provider('$rbac',[function () {
 	    /**
 		 * Holds all permissions for AuthItems that were requests from server
@@ -114,7 +114,7 @@ angular.module('rbac', ['lodash'])
 	            if (request.length) {
 	                settings.serverRequest(request).then(function (response) {
 	                    angular.forEach(response.data, function (value, key) {
-	                        permissions[value] = true;
+	                        permissions[key] = value;
 	                    });
 
 	                    deferred.resolve(response.data);
@@ -162,7 +162,7 @@ angular.module('rbac', ['lodash'])
 
 	        /**
 			 * Put AuthItem in queue for checking of permission. Can be used from directives. Checking will be delayed till next $digest.
-			 * @param {string} authItem - AuthItem to check for permission
+			 * @param {string} authItems - AuthItems to check for permission
 			 */
 	        var enqueueCheckingFn = function (authItems) {
 	            angular.forEach(splitRolesFn(authItems), function (authItem) {
@@ -172,7 +172,7 @@ angular.module('rbac', ['lodash'])
 
 	        /**
 			 * Return current state of permission for AuthItem. Don't use it directly, used at watch function inside of directive
-			 * @param {string} authItem - AuthItem to get
+			 * @param {string} authItems - AuthItems to get
 			 * @returns {(boolean|undefined)}
 			 */
 	        var allowFn = function (authItems) {
@@ -226,10 +226,8 @@ angular.module('rbac', ['lodash'])
 	        };
 
 	        var splitRolesFn = function (roles) {
-	            var rolesArray = roles.replace(/,/g, '').replace(/^\s\s*/, '').replace(/\s\s*$/, '').replace(/[\s,]+/g, ',').split(',');
-
-	            return rolesArray;
-	        }
+				return roles.replace(/,/g, '').replace(/^\s\s*/, '').replace(/\s\s*$/, '').replace(/[\s,]+/g, ',').split(',');
+	        };
 
 	        var $rbac = {
 	            checkAccess: checkAccessFn,
@@ -259,7 +257,6 @@ angular.module('rbac', ['lodash'])
 	        compile: function (element, attr, transclude) {
 	            return function ($scope, $element, $attr) {
 	                var childElement, childScope;
-	                var counter = 0;
 	                $scope.$watch(function () { return $rbac.allow($attr.allow);
 	                }, function (newVal) {
 	                    if (!angular.isDefined(newVal))
