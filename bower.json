@@ -1,0 +1,26 @@
+{
+  "name": "angular-rbac",
+  "version": "1.0.0",
+  "homepage": "https://github.com/iddqdidkfa/angular-rbac",
+  "authors": [
+    "Gayvoronsky Andrey <plandem@gmail.com>"
+  ],
+  "description": "A simple version of RBAC for angular from server side storage",
+  "main": "rbac.js",
+  "moduleType": [
+    "es6"
+  ],
+  "keywords": [
+    "angular",
+    "rbac",
+    "access-control"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
