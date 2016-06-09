@@ -1,0 +1,13 @@
+{
+  "name": "angular-rbac",
+  "version": "1.0.0",
+  "main": "rbac.js",
+  "authors": [
+    "Gayvoronsky Andrey <plandem@gmail.com>"
+  ],
+  "description": "A simple version of RBAC for angular from server side storage",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "^1.5.5"
+  }
+}
