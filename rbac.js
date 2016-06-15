@@ -48,7 +48,11 @@ angular.module('rbac', [])
 			 * @param {string[]} authItems - array of authItems to check permissions
 			 * @returns {promise}
 			 */
-	        serverRequest: undefined
+	        serverRequest: undefined,
+			/**
+			 * Access Token for authorize http get
+			 */
+			access_token: undefined
 	    };
 
 	    /**
@@ -69,7 +73,12 @@ angular.module('rbac', [])
 	                throw 'RBAC is not configured properly. Configure URL via setup().';
 
 	            settings.serverRequest = function (authItems) {
-	                return $http.get(settings.url, { items: authItems });
+	                return $http.get(settings.url, {
+						items: authItems,
+						headers: {
+							Authorization: 'Bearer ' + settings.access_token
+						}
+					});
 	            };
 	        }
 
@@ -286,3 +295,4 @@ angular.module('rbac', [])
 	        }
 	    };
 	}]);
+	
